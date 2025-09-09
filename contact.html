@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Leading Edge Team Building</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .contact-header {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)),
+                        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            background-color: var(--light-bg);
+            padding: 3rem;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .contact-item p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-container h3 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .checkbox-item:hover label {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                padding: 2rem 5%;
+            }
+
+            .contact-info,
+            .form-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/bdddc7c6f0af442761ea3cbfe5a19b0f590f8090/LETB%20Logo%20Words%20Transparent.png" alt="Leading Edge Team Building" class="navbar-logo">
+                <span class="logo-text">Leading Edge Team Building</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header class="banner">
+        <div class="banner-content">
+            <h1>Contact Us</h1>
+            <p>Ready to energize your team? Let's talk about your next offsite</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-content">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p><a href="tel:650-651-8326">650-651-8326 (TEAM)</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p><a href="mailto:hello@leadingedgeteambuilding.com">hello@leadingedgeteambuilding.com</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>San Francisco Bay Area<br>Available Nationwide</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Monday - Friday<br>9:00 AM - 6:00 PM PST</p>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h3>Team Building Inquiry</h3>
+                    <div class="success-message" id="successMessage">
+                        Thank you for your inquiry! We'll get back to you within 24 hours.
+                    </div>
+                    <div class="error-message" id="errorMessage">
+                        Please fill in all required fields and try again.
+                    </div>
+                    
+                    <form id="contactForm" action="https://formspree.io/f/xnnbleea" method="POST">
+                        <!-- Honeypot field for spam protection -->
+                        <div style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="_gotcha"></label>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company/Organization <span class="required">*</span></label>
+                            <input type="text" id="company" name="company" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="teamSize">Team Size <span class="required">*</span></label>
+                            <select id="teamSize" name="teamSize" required>
+                                <option value="">Select team size</option>
+                                <option value="5-10">5-10 people</option>
+                                <option value="11-25">11-25 people</option>
+                                <option value="26-50">26-50 people</option>
+                                <option value="51-100">51-100 people</option>
+                                <option value="100+">100+ people</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="teamSizeOther" style="display: none;">
+                            <label for="teamSizeOtherText">Please specify team size</label>
+                            <input type="text" id="teamSizeOtherText" name="teamSizeOtherText" placeholder="e.g., 150 people">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventDate">Preferred Date(s)</label>
+                            <input type="text" id="eventDate" name="eventDate" placeholder="e.g., March 15-17, 2024 or Flexible">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location <span class="required">*</span></label>
+                            <input type="text" id="location" name="location" placeholder="City, State" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="goals">What are your main goals for this event? <span class="required">*</span></label>
+                            <textarea id="goals" name="goals" placeholder="e.g., Improve team communication, build trust, celebrate achievements, etc." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Any specific activities you're interested in?</label>
+                            <div class="checkbox-grid">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-apollo" name="activities" value="Apollo Simulation">
+                                    <label for="activity-apollo">Apollo Simulation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-blueprint" name="activities" value="Blueprint Simulation">
+                                    <label for="activity-blueprint">Blueprint Simulation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-gameon" name="activities" value="Game On">
+                                    <label for="activity-gameon">Game On</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-geoquest" name="activities" value="GeoQuest">
+                                    <label for="activity-geoquest">GeoQuest</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-greatescape" name="activities" value="Great Escape">
+                                    <label for="activity-greatescape">Great Escape</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-greatoutdoors" name="activities" value="Great Outdoors">
+                                    <label for="activity-greatoutdoors">Great Outdoors</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-interconnect" name="activities" value="Inter Connect">
+                                    <label for="activity-interconnect">Inter Connect</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-levelup" name="activities" value="Level Up">
+                                    <label for="activity-levelup">Level Up</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-tailored" name="activities" value="Tailored Design">
+                                    <label for="activity-tailored">Tailored Design</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-teambrainiac" name="activities" value="Team Brainiac">
+                                    <label for="activity-teambrainiac">Team Brainiac</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activity-island" name="activities" value="The Island">
+                                    <label for="activity-island">The Island</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalInfo">Additional Information</label>
+                            <textarea id="additionalInfo" name="additionalInfo" placeholder="Any other details about your event, special requirements, or questions..."></textarea>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Subscribe to our newsletter for team building tips and updates</label>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>650-651-8326 (TEAM)</p>
+                <p>hello@leadingedgeteambuilding.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Leading Edge Team Building, a division of Leading Edge Consulting Group LLC. All rights reserved. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Form submission with Formspree (AJAX)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const form = this;
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Check if all required fields are filled
+            const requiredFields = document.querySelectorAll('[required]');
+            let allValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    allValid = false;
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            if (!allValid) {
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            
+            // Submit form via AJAX to Formspree
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success - show custom message
+                    successMessage.style.display = 'block';
+                    form.reset();
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Re-enable submit button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Inquiry';
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                // Error - show error message
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Inquiry';
+            });
+        });
+        
+        // Real-time validation
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+        });
+
+        // Handle "Other" team size option
+        document.getElementById('teamSize').addEventListener('change', function() {
+            const otherField = document.getElementById('teamSizeOther');
+            if (this.value === 'other') {
+                otherField.style.display = 'block';
+                document.getElementById('teamSizeOtherText').required = true;
+            } else {
+                otherField.style.display = 'none';
+                document.getElementById('teamSizeOtherText').required = false;
+                document.getElementById('teamSizeOtherText').value = '';
+            }
+        });
+        
+    </script>
+</body>
+</html>
