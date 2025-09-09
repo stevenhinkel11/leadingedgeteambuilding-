@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities - Leading Edge Team Building</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 2.2rem 0 1.4rem 0;
+            margin-bottom: 1rem;
+        }
+
+        /* Add a full line of space between paragraphs */
+        p + p {
+            margin-top: 1rem;
+        }
+
+        .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        body {
+            padding-top: 120px;
+        }
+
+        .banner-tabs {
+            margin-top: 1rem;
+        }
+
+        .banner-tabs ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .banner-tabs a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            background: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .banner-tabs a:hover,
+        .banner-tabs a.active {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .navbar {
+            padding: 1.4rem 5%;
+            margin: 0;
+            border: none;
+            outline: none;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-logo {
+            height: 105px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .banner h1 {
+            font-size: 2.5rem;
+            margin: 0 0 0.6rem 0;
+            font-weight: 600;
+        }
+
+        .banner p {
+            font-size: 1.1rem;
+            margin: 0;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+
+            .banner h1 {
+                font-size: 2rem;
+            }
+
+            .banner p {
+                font-size: 1rem;
+            }
+
+            .navbar-logo {
+                height: 70px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        .section-header {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+            text-align: left;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 0.75rem;
+            background: transparent;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(280px, 1fr));
+            gap: 4rem;
+            padding: 3rem 2%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .activity-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 480px;
+            position: relative;
+            min-width: 0;
+        }
+
+        .activity-card:hover {
+            box-shadow: 0 10px 30px rgba(44,62,80,0.18);
+            z-index: 20;
+        }
+
+        .activity-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center 30%;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-width: 0;
+        }
+
+        .activity-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .activity-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+        }
+
+        .activity-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-preview {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .activity-full {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            padding: 1.2rem;
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.98) translateY(20px);
+            transition: all 0.3s cubic-bezier(.4,2,.6,1);
+            z-index: 10;
+            max-height: 420px;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(44,62,80,0.18);
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .activity-card:hover .activity-full {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1.04) translateY(0);
+        }
+
+        .activity-full::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .activity-full::-webkit-scrollbar-track {
+            background: var(--light-bg);
+            border-radius: 4px;
+        }
+
+        .activity-full::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        .activity-full::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-card {
+                height: 420px;
+            }
+
+            .activity-full {
+                max-height: 420px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/bdddc7c6f0af442761ea3cbfe5a19b0f590f8090/LETB%20Logo%20Words%20Transparent.png" alt="Leading Edge Team Building" class="navbar-logo">
+                <span class="logo-text">Leading Edge Team Building</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main>
+        <div class="banner">
+            <div class="banner-content">
+                <h1>Team Building Activities</h1>
+                <p>Choose from our wide range of indoor and outdoor activities designed to strengthen your team</p>
+                <nav class="banner-tabs" id="activitiesNav">
+                    <ul>
+                        <li><a href="#outdoor" id="nav-outdoor" class="active">Outdoor</a></li>
+                        <li><a href="#indoor" id="nav-indoor">Indoor</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+        <div id="outdoor"></div>
+        <div class="section-header">Outdoor Activities</div>
+        <section class="activity-grid">
+            <!-- GeoQuest -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/refs/heads/Images/Geo.avif');"></div>
+                <div class="activity-content">
+                    <h3>GeoQuest</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 3-4 hours</span>
+                        <span><i class="fas fa-users"></i> 15-200</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>Ready, set, go geocaching! You and your team will use GPS to try to find as many hidden containers as you can in an expansive area with a limited time-frame.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>GeoQuest</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 3-4 hours</span>
+                            <span><i class="fas fa-users"></i> 15-200</span>
+                        </div>
+                        <p>Ready, set, go geocaching! You and your team will use GPS to try to find as many hidden containers as you can in an expansive area with a limited time-frame.</p>
+                        <p>As you discover caches, you'll likely discover new insights about your teammates. This program can be configured as an all out competition between teams, or a collaboration among multiple teams trying to achieve a greater goal together.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Island -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/dbe0e91e873da277770027766caec76ead713050/Island%20Image.JPG');"></div>
+                <div class="activity-content">
+                    <h3>The Island</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 3.5-5 hours</span>
+                        <span><i class="fas fa-users"></i> 5-25</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>If the thought of being stranded on a desert island sounds intimidating yet exciting, we have the activity for you. In this simulation, your team has been "trapped on a desert island" and must solve a series of difficult challenges to survive and get rescued.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>The Island</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 3.5-5 hours</span>
+                            <span><i class="fas fa-users"></i> 5-25</span>
+                        </div>
+                        <p>If the thought of being stranded on a desert island sounds intimidating yet exciting, we have the activity for you. In this simulation, your team has been "trapped on a desert island" and must solve a series of difficult challenges to survive and get rescued.</p>
+                        <p>The scenario: You and your team are stranded on a desert island. You must work together to survive and get rescued. The challenges range from building a shelter, finding food, and purifying water to navigating through treacherous terrain and dealing with the elements. You'll need to use your problem-solving skills, teamwork, and adaptability to succeed.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level Up -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/8f03597e243d8261827663df8f029e88a9725583/level%20up.jpeg');"></div>
+                <div class="activity-content">
+                    <h3>Level Up</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 3-6 hours</span>
+                        <span><i class="fas fa-users"></i> 5-30</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>The perfect activity for groups who want to come together or deepen connections quickly. Level Up works its magic every time. This program is a blend of low ropes course activities that are both customizable and portable.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Level Up</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 3-6 hours</span>
+                            <span><i class="fas fa-users"></i> 5-30</span>
+                        </div>
+                        <p>The perfect activity for groups who want to come together or deepen connections quickly. Level Up works its magic every time. This program is a blend of low ropes course activities that are both customizable and portable.</p>
+                        <p>Level Up is designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes a variety of activities that are both fun and challenging, allowing participants to learn and grow in a supportive environment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Great Outdoors -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="activity-content">
+                    <h3>Great Outdoors</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 1-3 days</span>
+                        <span><i class="fas fa-users"></i> 5-60</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>Considering a unique overnight retreat with your team? Nothing connects people better than spending time together in the great outdoors. Our overnight camping trips range from one to multiple nights, and include a series of custom designed experiential activities.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Great Outdoors</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 1-3 days</span>
+                            <span><i class="fas fa-users"></i> 5-60</span>
+                        </div>
+                        <p>Considering a unique overnight retreat with your team? Nothing connects people better than spending time together in the great outdoors. Our overnight camping trips range from one to multiple nights, and include a series of custom designed experiential activities.</p>
+                        <p>The Great Outdoors program offers a range of outdoor activities that are designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes activities such as hiking, team-building exercises, and outdoor games that are tailored to the specific needs and interests of your team.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game On -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/dbe0e91e873da277770027766caec76ead713050/game%20on.jpg');"></div>
+                <div class="activity-content">
+                    <h3>Game On</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 2-3 hours</span>
+                        <span><i class="fas fa-users"></i> 15-100</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>There's nothing like a little friendly competition to get people fired up. Particularly when the activities are fun and challenging, and you get to complete them in a beautiful beach or park setting.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Game On</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 2-3 hours</span>
+                            <span><i class="fas fa-users"></i> 15-100</span>
+                        </div>
+                        <p>There's nothing like a little friendly competition to get people fired up. Particularly when the activities are fun and challenging, and you get to complete them in a beautiful beach or park setting.</p>
+                        <p>Game On is designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes a variety of activities that are both fun and challenging, allowing participants to learn and grow in a supportive environment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tailored Design -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/e7b6a1cf4fd61a15739fb8c11d2934313ce1a777/Tailored%20Design.png');"></div>
+                <div class="activity-content">
+                    <h3>Tailored Design</h3>
+                    <div class="activity-meta">
+                        <span><i class="fas fa-cog"></i> Custom</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>With over a decade of experience, we actually have more activities than we can (or should) feature on our site. If you want to explore what else we can do for you, reach out and we'll help you choose the best activity or combination of activities that meets your needs.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Tailored Design</h3>
+                        <div class="activity-meta">
+                            <span><i class="fas fa-cog"></i> Custom</span>
+                        </div>
+                        <p>With over a decade of experience, we actually have more activities than we can (or should) feature on our site. If you want to explore what else we can do for you, reach out and we'll help you choose the best activity or combination of activities that meets your needs.</p>
+                        <p>The Tailored Design program offers a range of activities that are designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes activities that are tailored to the specific needs and interests of your team.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="indoor"></div>
+        <div class="section-header">Indoor Activities</div>
+        <section class="activity-grid">
+            <!-- Great Escape -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Great%20Escape.png');"></div>
+                <div class="activity-content">
+                    <h3>Great Escape</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 1.5-3 hours</span>
+                        <span><i class="fas fa-users"></i> 5-20</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>You're trapped. And for better or worse, you're trapped with your work team. You have a limited amount of time to get out of the room before [insert your worst nightmare here] occurs.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Great Escape</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 1.5-3 hours</span>
+                            <span><i class="fas fa-users"></i> 5-20</span>
+                        </div>
+                        <p>You're trapped. And for better or worse, you're trapped with your work team. You have a limited amount of time to get out of the room before [insert your worst nightmare here] occurs. Now, can you calm down, work together, and find and decipher the relevant clues to escape the room? Maybe, but success is far from guaranteed.</p>
+                        <p>What make our escape rooms unique are two things. First, we're one of few who bring an escape room to you in your office or offsite location. Second, we provide the opportunity to pause, reflect, and learn how to improve your team's process and communication to increase your chance of success in the second half.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apollo Simulation -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Apollo.png');"></div>
+                <div class="activity-content">
+                    <h3>Apollo Simulation</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 3-4 hours</span>
+                        <span><i class="fas fa-users"></i> 8-100</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>Apollo 13 mission simulation, with teams as astronauts and mission control solving creative challenges.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Apollo Simulation</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 3-4 hours</span>
+                            <span><i class="fas fa-users"></i> 8-100</span>
+                        </div>
+                        <p>Oxygen is running out. Power is running out. Time is running out. Failure is not an option: the astronauts must make it back to earth.</p>
+                        <p>This simulation brings to life aspects of the Apollo 13 mission, and draws parallels to the creative problem solving, teamwork, and communication that allowed the astronauts to survive against all odds.</p>
+                        <p>Your team is divided into two groups: astronauts, and mission control. Each group is facing its own challenges while simultaneously attempting to solve the overarching catastrophic issues that must be resolved in order for the astronauts to return safely.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Brainiac -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Brainiac.png');"></div>
+                <div class="activity-content">
+                    <h3>Team Brainiac</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 2-3.5 hours</span>
+                        <span><i class="fas fa-users"></i> 10-150</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>Micro challenges and puzzles that highlight each person's unique strengths.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Team Brainiac</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 2-3.5 hours</span>
+                            <span><i class="fas fa-users"></i> 10-150</span>
+                        </div>
+                        <p>We're all bright. Just how bright we are, and how we are bright, can be seen and experienced in Team Brainiac. This program features a wide range of micro challenges that teams complete to earn points. Each challenge has a different focus and uses different types of skills and thinking, so it's a great way to keep the whole team engaged and highlight each person's unique strengths.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blueprint Simulation -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Blueprint%20.png');"></div>
+                <div class="activity-content">
+                    <h3>Blueprint Simulation</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 3-4.5 hours</span>
+                        <span><i class="fas fa-users"></i> 15-40</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>Build a machine with limited information, tough customers, and resource constraints.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Blueprint Simulation</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 3-4.5 hours</span>
+                            <span><i class="fas fa-users"></i> 15-40</span>
+                        </div>
+                        <p>The task: build the machine. Your customer is counting on it. The only problem is, your team has never built this type of machine before and you have very limited and scattered information about how to do it. Oh, and there may be a few other problems too. Tough customer, change orders, resource constraints, and limited ability to communicate with other parts of the team pervade this simulation.</p>
+                        <p>It's a bit of a "fun meets serious" situation. We're pretty sure you'll walk away with some new insights about effective teamwork, as well as a little contraption that you never thought you'd need.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inter Connect -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/InterConnect.png');"></div>
+                <div class="activity-content">
+                    <h3>Inter Connect</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 2-5 hours</span>
+                        <span><i class="fas fa-users"></i> 5-20</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>Web-based simulation for virtual or hybrid teams, focused on communication and collaboration.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>Inter Connect</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 2-5 hours</span>
+                            <span><i class="fas fa-users"></i> 5-20</span>
+                        </div>
+                        <p>Struggling to navigate the ins and outs of managing a virtual or hybrid team? Our custom-designed simulations are here to help. With a focus on effective communication, problem solving, and collaboration across boundaries, we can provide the tune-up your team needs. Designs can be for partially or completely virtual teams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>650-651-8326 (TEAM)</p>
+                <p>hello@leadingedgeteambuilding.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Leading Edge Team Building, a division of Leading Edge Consulting Group LLC. All rights reserved. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    // Highlight nav based on scroll position
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = ['outdoor', 'indoor'];
+        const navLinks = sections.map(id => document.getElementById('nav-' + id));
+        const sectionDivs = sections.map(id => document.getElementById(id));
+        function onScroll() {
+            let scrollPos = window.scrollY + 120;
+            let activeIdx = 0;
+            for (let i = 0; i < sectionDivs.length; i++) {
+                if (sectionDivs[i].offsetTop <= scrollPos) {
+                    activeIdx = i;
+                }
+            }
+            navLinks.forEach((link, idx) => link.classList.toggle('active', idx === activeIdx));
+        }
+        window.addEventListener('scroll', onScroll);
+        onScroll();
+    });
+    </script>
+</body>
+</html> 

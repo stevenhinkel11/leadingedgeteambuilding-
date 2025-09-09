@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Leading Edge Team Building</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .about-header {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)),
+                        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .about-section {
+            margin-bottom: 4rem;
+        }
+
+        .about-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .about-section p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .values-section {
+            background-color: var(--light-bg);
+            padding: 4rem 5%;
+            margin-top: 4rem;
+        }
+
+        .values-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .values-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .values-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .team-section {
+            padding: 4rem 5%;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .team-member-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .team-member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .team-member-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member-info p {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .philosophy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .philosophy-text {
+            order: 1;
+        }
+
+        .philosophy-image {
+            order: 2;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .values-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .values-text {
+            order: 2;
+        }
+
+        .values-image {
+            order: 1;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .philosophy-content,
+            .values-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .philosophy-text,
+            .values-text {
+                order: 1;
+            }
+            
+            .philosophy-image,
+            .values-image {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/bdddc7c6f0af442761ea3cbfe5a19b0f590f8090/LETB%20Logo%20Words%20Transparent.png" alt="Leading Edge Team Building" class="navbar-logo">
+                <span class="logo-text">Leading Edge Team Building</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header class="banner">
+        <div class="banner-content">
+            <h1>About Us</h1>
+            <p>Building stronger teams through shared experiences</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-content">
+            <div class="about-section reveal">
+                <div class="philosophy-content">
+                    <div class="philosophy-text">
+                        <h2>Our Philosophy: The Power of Play</h2>
+                        <p>Most of us remember recess and playtime as the best part of school—and for good reason. Research shows we learn best when we're moving, interacting, solving problems, and having fun. Play isn't just for kids; it helps adults connect, learn, and grow too.</p>
+                        <p>We believe in the power of play to spark deeper connections and unlock lasting learning. Our approach combines engaging play with guided reflection to maximize impact. Come play with us!</p>
+                    </div>
+                    <div class="philosophy-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/0b4edc789f45d9cef038efd5f9a823e29d5004d0/game.jpg?raw=true');"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section reveal">
+            <div class="values-content">
+                <div class="values-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/f3b9d6d66588849f3bcfe2f91abcd6f4c6293b1d/values.jpeg?raw=true');"></div>
+                <div class="values-text">
+                    <h2>Our Values</h2>
+                    <p>At the heart of what we do are two values: Enjoyment and Learning. After realizing we couldn't solve the ultimate meaning of life, we chose to focus on appreciating the life we have—enjoying it fully and learning as much as we can.</p>
+                    <p>These values guide our work with clients and each other, creating experiences that are fun, meaningful, and full of discovery.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Single, dedicated icons section -->
+        <section class="about-content reveal">
+            <div class="about-section">
+                <h2>Our Core Principles</h2>
+                <div class="icon-grid">
+                    <div class="icon-card">
+                        <i class="fas fa-laugh-beam"></i>
+                        <h3>Enjoyment</h3>
+                        <p>Make work feel like play—and watch energy rise.</p>
+                    </div>
+                    <div class="icon-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Learning</h3>
+                        <p>Turn “aha!” moments into everyday behaviors.</p>
+                    </div>
+                    <div class="icon-card">
+                        <i class="fas fa-people-arrows"></i>
+                        <h3>Connection</h3>
+                        <p>Build trust fast through shared challenges.</p>
+                    </div>
+                    <div class="icon-card">
+                        <i class="fas fa-compass"></i>
+                        <h3>Purpose</h3>
+                        <p>Play with a point—always tied to outcomes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats reveal">
+            <div class="stat"><h3 data-target="15">0</h3><p>Years in Talent & Culture Work</p></div>
+            <div class="stat"><h3>Dozens</h3><p>Of clients served,<br>from startups to fortune 500s</p></div>
+            <div class="stat"><h3 data-target="100">0</h3><p>% Clients Report Stronger<br>Team Connections</p></div>
+        </section>
+
+        <section class="cta-band reveal">
+            <h2>Ready to energize your next offsite?</h2>
+            <a class="cta-button" href="activities.html">Explore Activities</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>650-651-8326 (TEAM)</p>
+                <p>hello@leadingedgeteambuilding.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Leading Edge Team Building, a division of Leading Edge Consulting Group LLC. All rights reserved. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
