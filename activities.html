@@ -198,6 +198,36 @@
             font-size: 1rem;
             flex: 1 1 auto;
             min-width: 0;
+            position: relative;
+        }
+
+        .expand-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+            z-index: 5;
+            display: none; /* Hidden by default */
+        }
+
+        .expand-button:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .expand-button:active {
+            transform: scale(0.95);
         }
 
         .activity-full {
@@ -234,6 +264,60 @@
             transform: scale(1.04) translateY(0);
         }
 
+        /* Full-screen text overlay for mobile */
+        .text-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .text-overlay.active {
+            display: flex;
+        }
+
+        .text-overlay-content {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .text-overlay-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .text-overlay-close:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
         .activity-full::-webkit-scrollbar {
             width: 8px;
         }
@@ -252,6 +336,7 @@
             background: var(--primary-color);
         }
 
+
         @media (max-width: 768px) {
             .activity-grid {
                 grid-template-columns: 1fr;
@@ -259,11 +344,15 @@
 
             .activity-card {
                 height: 420px;
-                cursor: pointer;
             }
 
             .activity-full {
                 max-height: 420px;
+            }
+
+            /* Show expand button on mobile */
+            .expand-button {
+                display: flex;
             }
 
             /* Disable hover effects on mobile */
@@ -273,11 +362,11 @@
                 transform: scale(0.98) translateY(20px);
             }
 
-            /* Show expanded state on mobile */
+            /* Hide expanded state on mobile - we use overlay instead */
             .activity-card.expanded .activity-full {
-                opacity: 1;
-                visibility: visible;
-                transform: scale(1.04) translateY(0);
+                opacity: 0;
+                visibility: hidden;
+                transform: scale(0.98) translateY(20px);
             }
         }
     </style>
@@ -331,6 +420,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>Ready, set, go geocaching! You and your team will use GPS to try to find as many hidden containers as you can in an expansive area with a limited time-frame.</p>
+                        <button class="expand-button" data-activity="geoquest">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>GeoQuest</h3>
@@ -355,6 +445,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>If the thought of being stranded on a desert island sounds intimidating yet exciting, we have the activity for you. In this simulation, your team has been "trapped on a desert island" and must solve a series of difficult challenges to survive and get rescued.</p>
+                        <button class="expand-button" data-activity="island">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>The Island</h3>
@@ -379,6 +470,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>The perfect activity for groups who want to come together or deepen connections quickly. Level Up works its magic every time. This program is a blend of low ropes course activities that are both customizable and portable.</p>
+                        <button class="expand-button" data-activity="levelup">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Level Up</h3>
@@ -403,6 +495,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>Considering a unique overnight retreat with your team? Nothing connects people better than spending time together in the great outdoors. Our overnight camping trips range from one to multiple nights, and include a series of custom designed experiential activities.</p>
+                        <button class="expand-button" data-activity="greatoutdoors">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Great Outdoors</h3>
@@ -427,6 +520,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>There's nothing like a little friendly competition to get people fired up. Particularly when the activities are fun and challenging, and you get to complete them in a beautiful beach or park setting.</p>
+                        <button class="expand-button" data-activity="gameon">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Game On</h3>
@@ -450,6 +544,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>With over a decade of experience, we actually have more activities than we can (or should) feature on our site. If you want to explore what else we can do for you, reach out and we'll help you choose the best activity or combination of activities that meets your needs.</p>
+                        <button class="expand-button" data-activity="tailored">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Tailored Design</h3>
@@ -477,6 +572,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>You're trapped. And for better or worse, you're trapped with your work team. You have a limited amount of time to get out of the room before [insert your worst nightmare here] occurs.</p>
+                        <button class="expand-button" data-activity="greatescape">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Great Escape</h3>
@@ -501,6 +597,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>Apollo 13 mission simulation, with teams as astronauts and mission control solving creative challenges.</p>
+                        <button class="expand-button" data-activity="apollo">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Apollo Simulation</h3>
@@ -526,6 +623,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>Micro challenges and puzzles that highlight each person's unique strengths.</p>
+                        <button class="expand-button" data-activity="brainiac">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Team Brainiac</h3>
@@ -549,6 +647,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>Build a machine with limited information, tough customers, and resource constraints.</p>
+                        <button class="expand-button" data-activity="blueprint">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Blueprint Simulation</h3>
@@ -573,6 +672,7 @@
                     </div>
                     <div class="activity-preview">
                         <p>Web-based simulation for virtual or hybrid teams, focused on communication and collaboration.</p>
+                        <button class="expand-button" data-activity="interconnect">⋯</button>
                     </div>
                     <div class="activity-full">
                         <h3>Inter Connect</h3>
@@ -586,6 +686,14 @@
             </div>
         </section>
     </main>
+
+    <!-- Text overlay for mobile -->
+    <div class="text-overlay" id="textOverlay">
+        <div class="text-overlay-content">
+            <button class="text-overlay-close" id="closeOverlay">&times;</button>
+            <div id="overlayContent"></div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -620,23 +728,52 @@
         window.addEventListener('scroll', onScroll);
         onScroll();
 
-        // Mobile click-to-expand functionality
-        if (window.innerWidth <= 768) {
-            const activityCards = document.querySelectorAll('.activity-card');
-            activityCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    // Close all other expanded cards
-                    activityCards.forEach(otherCard => {
-                        if (otherCard !== card) {
-                            otherCard.classList.remove('expanded');
-                        }
-                    });
-                    
-                    // Toggle current card
-                    card.classList.toggle('expanded');
-                });
-            });
-        }
+        // Mobile text overlay functionality
+        const textOverlay = document.getElementById('textOverlay');
+        const overlayContent = document.getElementById('overlayContent');
+        const closeOverlay = document.getElementById('closeOverlay');
+
+        // Handle expand button clicks
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('expand-button')) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                const button = event.target;
+                const activityId = button.getAttribute('data-activity');
+                const activityCard = button.closest('.activity-card');
+                const fullContent = activityCard.querySelector('.activity-full');
+                
+                // Copy the full content to the overlay
+                overlayContent.innerHTML = fullContent.innerHTML;
+                
+                // Show the overlay
+                textOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        });
+
+        // Handle close button clicks
+        closeOverlay.addEventListener('click', function() {
+            textOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Handle clicking outside the overlay to close
+        textOverlay.addEventListener('click', function(event) {
+            if (event.target === textOverlay) {
+                textOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Handle escape key to close
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && textOverlay.classList.contains('active')) {
+                textOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
     });
     </script>
 </body>
