@@ -37,16 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
     let isMenuOpen = false;
 
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
             isMenuOpen = !isMenuOpen;
-            navLinks.style.display = isMenuOpen ? 'flex' : 'none';
+            navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
         });
 
+        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (isMenuOpen && !e.target.closest('.navbar')) {
                 isMenuOpen = false;
-                navLinks.style.display = 'none';
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking on nav links
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                isMenuOpen = false;
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Close menu on window resize if screen becomes larger
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && isMenuOpen) {
+                isMenuOpen = false;
+                navLinks.classList.remove('active');
                 hamburger.classList.remove('active');
             }
         });

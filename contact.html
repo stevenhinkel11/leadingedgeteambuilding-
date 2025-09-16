@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Leading Edge Team Building</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/bdddc7c6f0af442761ea3cbfe5a19b0f590f8090/LETB%20Logo%20Words%20Transparent.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -281,12 +282,6 @@
 
                 <div class="form-container">
                     <h3>Team Building Inquiry</h3>
-                    <div class="success-message" id="successMessage">
-                        Thank you for your inquiry! We'll get back to you within 24 hours.
-                    </div>
-                    <div class="error-message" id="errorMessage">
-                        Please fill in all required fields and try again.
-                    </div>
                     
                     <form id="contactForm" action="https://formspree.io/f/xnnbleea" method="POST">
                         <!-- Honeypot field for spam protection -->
@@ -412,6 +407,13 @@
                         <div class="checkbox-group">
                             <input type="checkbox" id="newsletter" name="newsletter">
                             <label for="newsletter">Subscribe to our newsletter for team building tips and updates</label>
+                        </div>
+
+                        <div class="success-message" id="successMessage">
+                            Thank you for your inquiry! We'll get back to you within 24 hours.
+                        </div>
+                        <div class="error-message" id="errorMessage">
+                            Please fill in all required fields and try again.
                         </div>
 
                         <button type="submit" class="submit-btn" id="submitBtn">
