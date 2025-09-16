@@ -228,6 +228,12 @@
             transform: scale(1.04) translateY(0);
         }
 
+        .activity-card.expanded .activity-full {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1.04) translateY(0);
+        }
+
         .activity-full::-webkit-scrollbar {
             width: 8px;
         }
@@ -253,10 +259,25 @@
 
             .activity-card {
                 height: 420px;
+                cursor: pointer;
             }
 
             .activity-full {
                 max-height: 420px;
+            }
+
+            /* Disable hover effects on mobile */
+            .activity-card:hover .activity-full {
+                opacity: 0;
+                visibility: hidden;
+                transform: scale(0.98) translateY(20px);
+            }
+
+            /* Show expanded state on mobile */
+            .activity-card.expanded .activity-full {
+                opacity: 1;
+                visibility: visible;
+                transform: scale(1.04) translateY(0);
             }
         }
     </style>
@@ -598,6 +619,24 @@
         }
         window.addEventListener('scroll', onScroll);
         onScroll();
+
+        // Mobile click-to-expand functionality
+        if (window.innerWidth <= 768) {
+            const activityCards = document.querySelectorAll('.activity-card');
+            activityCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Close all other expanded cards
+                    activityCards.forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('expanded');
+                        }
+                    });
+                    
+                    // Toggle current card
+                    card.classList.toggle('expanded');
+                });
+            });
+        }
     });
     </script>
 </body>

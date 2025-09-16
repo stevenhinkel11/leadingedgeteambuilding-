@@ -79,11 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0665.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0667.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0668.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0681.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0690.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0703.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0708.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0729.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0739.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0740.jpg',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0748.jpg'
@@ -96,16 +94,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let start = 0;
-        const visibleCount = 3;
+        const visibleCount = window.innerWidth <= 768 ? 1 : 3;
         const prevBtn = document.querySelector('.album-prev');
         const nextBtn = document.querySelector('.album-next');
         let timerId;
 
         function render() {
+            const currentVisibleCount = window.innerWidth <= 768 ? 1 : 3;
             viewport.style.opacity = 0; // fade out
             setTimeout(() => {
                 viewport.innerHTML = '';
-                for (let i = 0; i < visibleCount; i++) {
+                for (let i = 0; i < currentVisibleCount; i++) {
                     const idx = (start + i) % imageUrls.length;
                     const div = document.createElement('div');
                     div.className = 'album-item';
@@ -122,8 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 120);
         }
 
-        function next() { start = (start + visibleCount) % imageUrls.length; render(); }
-        function prev() { start = (start - visibleCount + imageUrls.length) % imageUrls.length; render(); }
+        function next() { 
+            const currentVisibleCount = window.innerWidth <= 768 ? 1 : 3;
+            start = (start + currentVisibleCount) % imageUrls.length; 
+            render(); 
+        }
+        function prev() { 
+            const currentVisibleCount = window.innerWidth <= 768 ? 1 : 3;
+            start = (start - currentVisibleCount + imageUrls.length) % imageUrls.length; 
+            render(); 
+        }
 
         function startAuto() { stopAuto(); timerId = setInterval(next, 3000); }
         function stopAuto() { if (timerId) clearInterval(timerId); }
@@ -135,6 +142,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         render();
         startAuto();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            render();
+        });
     }
 
     // Reveal on scroll
