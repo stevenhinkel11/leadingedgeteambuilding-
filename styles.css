@@ -109,7 +109,7 @@ p + p {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)),
-                url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/ad56304dcc9e412b6ab6080e87e3bab9b2f9c294/homepage%20background.jpg');
+                url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/homepage background.avif');
     background-size: cover;
     background-position: center;
     display: flex;
