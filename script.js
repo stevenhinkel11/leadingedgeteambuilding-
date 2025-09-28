@@ -37,36 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
     let isMenuOpen = false;
 
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
+        hamburger.addEventListener('click', () => {
             isMenuOpen = !isMenuOpen;
-            navLinks.classList.toggle('active');
+            navLinks.style.display = isMenuOpen ? 'flex' : 'none';
             hamburger.classList.toggle('active');
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (isMenuOpen && !e.target.closest('.navbar')) {
                 isMenuOpen = false;
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-
-        // Close menu when clicking on nav links
-        navLinks.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') {
-                isMenuOpen = false;
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-
-        // Close menu on window resize if screen becomes larger
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && isMenuOpen) {
-                isMenuOpen = false;
-                navLinks.classList.remove('active');
+                navLinks.style.display = 'none';
                 hamburger.classList.remove('active');
             }
         });
@@ -87,23 +67,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const viewport = document.getElementById('albumViewport');
     if (viewport) {
         const imageUrls = [
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0568.JPG',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0563.JPG',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0559.JPG',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0552.JPG',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0648.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0649.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0653.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0654.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0665.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0667.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0668.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0690.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0703.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0708.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0739.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0740.jpg',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0748.jpg'
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0572.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0568.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0563.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0559.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0552.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/bfe01a719a2645c0432494b8eda24af30a3e8d3a/IMG_0648.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0649.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0653.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0654.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0665.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0667.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0668.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0690.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0703.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0708.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0739.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0740.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0748.avif'
         ];
 
         // Shuffle
