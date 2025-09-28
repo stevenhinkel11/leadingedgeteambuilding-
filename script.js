@@ -67,11 +67,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const viewport = document.getElementById('albumViewport');
     if (viewport) {
         const imageUrls = [
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0703.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0572.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0568.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0563.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0559.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/59252922f37b0387fe83fa3d8030cbe257416222/DSC_0552.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0552.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0559.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0563.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/DSC_0568.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/bfe01a719a2645c0432494b8eda24af30a3e8d3a/IMG_0648.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0649.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0653.avif',
@@ -80,18 +85,88 @@ document.addEventListener('DOMContentLoaded', function() {
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0667.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0668.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0690.avif',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0703.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0708.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0739.avif',
             'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0740.avif',
-            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0748.avif'
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0748.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/dozmopokkaqi70kceq9s.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/gbixcgtinpjno2lju4jv.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/jnmh5hk3bmmi3shj4ttz.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/q6bzxqmm36zmdmpincnv.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/rb3lua9p1alo73lxubps.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/rkcx69fqsgggfg6vbz1p.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/rkpxijlxbmgpfqdv6kyr.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/rpm3pegprolzskhkhnhm.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/stvdct4oecxtoa2rhcrh.avif',
+            'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/vqq6tpluwtravxcvmedp.avif'
         ];
 
-        // Shuffle
-        for (let i = imageUrls.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [imageUrls[i], imageUrls[j]] = [imageUrls[j], imageUrls[i]];
+        // Pre-check images and remove broken ones
+        function checkImages() {
+            const validImages = [];
+            let checkedCount = 0;
+            const targetImage = 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IMG_0703.avif';
+            
+            imageUrls.forEach((url, index) => {
+                const img = new Image();
+                img.onload = function() {
+                    validImages.push(url);
+                    checkedCount++;
+                    if (checkedCount === imageUrls.length) {
+                        imageUrls.length = 0;
+                        imageUrls.push(...validImages);
+                        
+                        // Ensure IMG_0703.avif is at index 0
+                        const targetIndex = imageUrls.indexOf(targetImage);
+                        if (targetIndex > 0) {
+                            // Move IMG_0703.avif to the front
+                            imageUrls.splice(targetIndex, 1);
+                            imageUrls.unshift(targetImage);
+                        }
+                        
+                        // Shuffle the rest (skip index 0)
+                        for (let i = imageUrls.length - 1; i > 1; i--) {
+                            const j = Math.floor(Math.random() * (i - 1)) + 1;
+                            [imageUrls[i], imageUrls[j]] = [imageUrls[j], imageUrls[i]];
+                        }
+                        
+                        start = 0; // Reset start position
+                        render();
+                        startAuto();
+                    }
+                };
+                img.onerror = function() {
+                    console.log('Removing broken image:', url);
+                    checkedCount++;
+                    if (checkedCount === imageUrls.length) {
+                        imageUrls.length = 0;
+                        imageUrls.push(...validImages);
+                        
+                        // Ensure IMG_0703.avif is at index 0
+                        const targetIndex = imageUrls.indexOf(targetImage);
+                        if (targetIndex > 0) {
+                            // Move IMG_0703.avif to the front
+                            imageUrls.splice(targetIndex, 1);
+                            imageUrls.unshift(targetImage);
+                        }
+                        
+                        // Shuffle the rest (skip index 0)
+                        for (let i = imageUrls.length - 1; i > 1; i--) {
+                            const j = Math.floor(Math.random() * (i - 1)) + 1;
+                            [imageUrls[i], imageUrls[j]] = [imageUrls[j], imageUrls[i]];
+                        }
+                        
+                        start = 0; // Reset start position
+                        render();
+                        startAuto();
+                    }
+                };
+                img.src = url;
+            });
         }
+        
+        // Start checking images
+        checkImages();
 
         let start = 0;
         const visibleCount = window.innerWidth <= 768 ? 1 : 3;
@@ -104,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             viewport.style.opacity = 0; // fade out
             setTimeout(() => {
                 viewport.innerHTML = '';
-                for (let i = 0; i < currentVisibleCount; i++) {
+                for (let i = 0; i < currentVisibleCount && i < imageUrls.length; i++) {
                     const idx = (start + i) % imageUrls.length;
                     const div = document.createElement('div');
                     div.className = 'album-item';
@@ -139,9 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (nextBtn) nextBtn.addEventListener('click', () => { next(); startAuto(); });
         viewport.addEventListener('mouseenter', stopAuto);
         viewport.addEventListener('mouseleave', startAuto);
-
-        render();
-        startAuto();
 
         // Handle window resize
         window.addEventListener('resize', () => {

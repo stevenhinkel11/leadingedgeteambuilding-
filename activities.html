@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activities - Leading Edge Team Building</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/7fcd42ad5ce0f011a1542e2e014b2a6daa4ac512/LETB%20Logo%20No%20Words%20Transparent.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -235,141 +234,22 @@
             transform: scale(1.04) translateY(0);
         }
 
-        /* Mobile ellipses button */
-        .activity-ellipses {
-            position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            background: var(--primary-color);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 15;
-        }
-
-        .activity-ellipses:hover {
-            background: var(--secondary-color);
-            transform: scale(1.1);
-        }
-
-        .activity-ellipses i {
-            font-size: 1.2rem;
-        }
-
-        /* Mobile overlay for full-screen activity text */
-        .mobile-activity-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--white);
-            z-index: 1000;
-            padding: 2rem 1.5rem;
-            overflow-y: auto;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .mobile-activity-overlay.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mobile-overlay-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--light-bg);
-        }
-
-        .mobile-overlay-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin: 0;
-        }
-
-        .mobile-overlay-close {
-            background: var(--secondary-color);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-overlay-close:hover {
-            background: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        .mobile-overlay-meta {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-            font-size: 1rem;
-        }
-
-        .mobile-overlay-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .mobile-overlay-content {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--text-color);
-        }
-
-        .mobile-overlay-content p {
-            margin-bottom: 1rem;
-        }
-
-        .mobile-overlay-content p:last-child {
-            margin-bottom: 0;
-        }
-
         .activity-full::-webkit-scrollbar {
-            width: 16px;
+            width: 8px;
         }
 
         .activity-full::-webkit-scrollbar-track {
             background: var(--light-bg);
-            border-radius: 8px;
-            border: 2px solid var(--white);
+            border-radius: 4px;
         }
 
         .activity-full::-webkit-scrollbar-thumb {
             background: var(--secondary-color);
-            border-radius: 8px;
-            border: 2px solid var(--white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 4px;
         }
 
         .activity-full::-webkit-scrollbar-thumb:hover {
             background: var(--primary-color);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
 
@@ -384,18 +264,6 @@
 
             .activity-full {
                 max-height: 420px;
-            }
-
-            /* Show ellipses button on mobile */
-            .activity-ellipses {
-                display: flex;
-            }
-
-            /* Hide hover effect on mobile */
-            .activity-card:hover .activity-full {
-                opacity: 0;
-                visibility: hidden;
-                transform: scale(0.98) translateY(20px);
             }
         }
     </style>
@@ -440,7 +308,7 @@
         <section class="activity-grid">
             <!-- GeoQuest -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Geo.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/refs/heads/Images/Geo.avif');"></div>
                 <div class="activity-content">
                     <h3>GeoQuest</h3>
                     <div class="activity-meta">
@@ -448,7 +316,7 @@
                         <span><i class="fas fa-users"></i> 15-200</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Ready, set, geocache! Use GPS to find hidden caches, uncover team insights, and compete or collaborate for a bigger goal.</p>
+                        <p>Ready, set, go geocaching! You and your team will use GPS to try to find as many hidden containers as you can in an expansive area with a limited time-frame.</p>
                     </div>
                     <div class="activity-full">
                         <h3>GeoQuest</h3>
@@ -459,15 +327,36 @@
                         <p>Ready, set, go geocaching! You and your team will use GPS to try to find as many hidden containers as you can in an expansive area with a limited time-frame.</p>
                         <p>As you discover caches, you'll likely discover new insights about your teammates. This program can be configured as an all out competition between teams, or a collaboration among multiple teams trying to achieve a greater goal together.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="geoquest">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
+                </div>
+            </div>
+
+            <!-- The Island -->
+            <div class="activity-card">
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/dbe0e91e873da277770027766caec76ead713050/Island%20Image.JPG');"></div>
+                <div class="activity-content">
+                    <h3>The Island</h3>
+                    <div class="activity-meta">
+                        <span><i class="far fa-clock"></i> 3.5-5 hours</span>
+                        <span><i class="fas fa-users"></i> 5-25</span>
+                    </div>
+                    <div class="activity-preview">
+                        <p>If the thought of being stranded on a desert island sounds intimidating yet exciting, we have the activity for you. In this simulation, your team has been "trapped on a desert island" and must solve a series of difficult challenges to survive and get rescued.</p>
+                    </div>
+                    <div class="activity-full">
+                        <h3>The Island</h3>
+                        <div class="activity-meta">
+                            <span><i class="far fa-clock"></i> 3.5-5 hours</span>
+                            <span><i class="fas fa-users"></i> 5-25</span>
+                        </div>
+                        <p>If the thought of being stranded on a desert island sounds intimidating yet exciting, we have the activity for you. In this simulation, your team has been "trapped on a desert island" and must solve a series of difficult challenges to survive and get rescued.</p>
+                        <p>The scenario: You and your team are stranded on a desert island. You must work together to survive and get rescued. The challenges range from building a shelter, finding food, and purifying water to navigating through treacherous terrain and dealing with the elements. You'll need to use your problem-solving skills, teamwork, and adaptability to succeed.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Level Up -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/level up.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/8f03597e243d8261827663df8f029e88a9725583/level%20up.jpeg');"></div>
                 <div class="activity-content">
                     <h3>Level Up</h3>
                     <div class="activity-meta">
@@ -475,7 +364,7 @@
                         <span><i class="fas fa-users"></i> 5-30</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Build stronger teams fast! Level Up combines low ropes fun with real lessons in teamwork, trust, and alignment.</p>
+                        <p>The perfect activity for groups who want to come together or deepen connections quickly. Level Up works its magic every time. This program is a blend of low ropes course activities that are both customizable and portable.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Level Up</h3>
@@ -486,42 +375,12 @@
                         <p>The perfect activity for groups who want to come together or deepen connections quickly. Level Up works its magic every time. This program is a blend of low ropes course activities that are both customizable and portable.</p>
                         <p>Level Up is designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes a variety of activities that are both fun and challenging, allowing participants to learn and grow in a supportive environment.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="levelup">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- The Island -->
-            <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/The Island.avif');"></div>
-                <div class="activity-content">
-                    <h3>The Island</h3>
-                    <div class="activity-meta">
-                        <span><i class="far fa-clock"></i> 3.5-5 hours</span>
-                        <span><i class="fas fa-users"></i> 5-25</span>
-                    </div>
-                    <div class="activity-preview">
-                        <p>Stranded on a desert island? Solve challenges, survive, and escape using teamwork, problem-solving, and adaptability.</p>
-                    </div>
-                    <div class="activity-full">
-                        <h3>The Island</h3>
-                        <div class="activity-meta">
-                            <span><i class="far fa-clock"></i> 3.5-5 hours</span>
-                            <span><i class="fas fa-users"></i> 5-25</span>
-                        </div>
-                        <p>If the thought of being stranded on a desert island sounds intimidating yet exciting, we have the activity for you. In this simulation, your team has been "trapped on a desert island" and must solve a series of difficult challenges to survive and get rescued.</p>
-                        <p>You must work together to survive and get rescued. The challenges range from building a shelter, finding food, and purifying water to navigating through treacherous terrain and dealing with the elements. You'll need to use your problem-solving skills, teamwork, and adaptability to succeed.</p>
-                    </div>
-                    <button class="activity-ellipses" data-activity="island">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
 
             <!-- Great Outdoors -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/great-outdoors.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="activity-content">
                     <h3>Great Outdoors</h3>
                     <div class="activity-meta">
@@ -529,7 +388,7 @@
                         <span><i class="fas fa-users"></i> 5-60</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Escape to the outdoors! Team retreats with camping and custom activities to build trust and teamwork.</p>
+                        <p>Considering a unique overnight retreat with your team? Nothing connects people better than spending time together in the great outdoors. Our overnight camping trips range from one to multiple nights, and include a series of custom designed experiential activities.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Great Outdoors</h3>
@@ -540,15 +399,12 @@
                         <p>Considering a unique overnight retreat with your team? Nothing connects people better than spending time together in the great outdoors. Our overnight camping trips range from one to multiple nights, and include a series of custom designed experiential activities.</p>
                         <p>The Great Outdoors program offers a range of outdoor activities that are designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes activities such as hiking, team-building exercises, and outdoor games that are tailored to the specific needs and interests of your team.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="greatoutdoors">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
 
             <!-- Game On -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/game on.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/dbe0e91e873da277770027766caec76ead713050/game%20on.jpg');"></div>
                 <div class="activity-content">
                     <h3>Game On</h3>
                     <div class="activity-meta">
@@ -556,7 +412,7 @@
                         <span><i class="fas fa-users"></i> 15-100</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Friendly competition meets teamwork! Fun challenges in parks or on beaches help your team connect.</p>
+                        <p>There's nothing like a little friendly competition to get people fired up. Particularly when the activities are fun and challenging, and you get to complete them in a beautiful beach or park setting.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Game On</h3>
@@ -567,22 +423,19 @@
                         <p>There's nothing like a little friendly competition to get people fired up. Particularly when the activities are fun and challenging, and you get to complete them in a beautiful beach or park setting.</p>
                         <p>Game On is designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes a variety of activities that are both fun and challenging, allowing participants to learn and grow in a supportive environment.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="gameon">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
 
             <!-- Tailored Design -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Tailored.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/e7b6a1cf4fd61a15739fb8c11d2934313ce1a777/Tailored%20Design.png');"></div>
                 <div class="activity-content">
                     <h3>Tailored Design</h3>
                     <div class="activity-meta">
                         <span><i class="fas fa-cog"></i> Custom</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Over a decade of experience lets us craft custom team activities that fit your goals perfectly.</p>
+                        <p>With over a decade of experience, we actually have more activities than we can (or should) feature on our site. If you want to explore what else we can do for you, reach out and we'll help you choose the best activity or combination of activities that meets your needs.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Tailored Design</h3>
@@ -592,9 +445,6 @@
                         <p>With over a decade of experience, we actually have more activities than we can (or should) feature on our site. If you want to explore what else we can do for you, reach out and we'll help you choose the best activity or combination of activities that meets your needs.</p>
                         <p>The Tailored Design program offers a range of activities that are designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes activities that are tailored to the specific needs and interests of your team.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="tailoreddesign">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
         </section>
@@ -604,7 +454,7 @@
         <section class="activity-grid">
             <!-- Great Escape -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Great Escape Square.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Great%20Escape.png');"></div>
                 <div class="activity-content">
                     <h3>Great Escape</h3>
                     <div class="activity-meta">
@@ -612,7 +462,7 @@
                         <span><i class="fas fa-users"></i> 5-20</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Can your team crack the clues and escape? Mobile escape rooms test problem-solving and teamwork skills.</p>
+                        <p>You're trapped. And for better or worse, you're trapped with your work team. You have a limited amount of time to get out of the room before [insert your worst nightmare here] occurs.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Great Escape</h3>
@@ -623,15 +473,12 @@
                         <p>You're trapped. And for better or worse, you're trapped with your work team. You have a limited amount of time to get out of the room before [insert your worst nightmare here] occurs. Now, can you calm down, work together, and find and decipher the relevant clues to escape the room? Maybe, but success is far from guaranteed.</p>
                         <p>What make our escape rooms unique are two things. First, we're one of few who bring an escape room to you in your office or offsite location. Second, we provide the opportunity to pause, reflect, and learn how to improve your team's process and communication to increase your chance of success in the second half.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="greatescape">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
 
             <!-- Apollo Simulation -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Apollo.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Apollo.png');"></div>
                 <div class="activity-content">
                     <h3>Apollo Simulation</h3>
                     <div class="activity-meta">
@@ -639,7 +486,7 @@
                         <span><i class="fas fa-users"></i> 8-100</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Apollo 13 comes alive! Teamwork, problem-solving, and communication under extreme pressure.</p>
+                        <p>Apollo 13 mission simulation, with teams as astronauts and mission control solving creative challenges.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Apollo Simulation</h3>
@@ -651,15 +498,12 @@
                         <p>This simulation brings to life aspects of the Apollo 13 mission, and draws parallels to the creative problem solving, teamwork, and communication that allowed the astronauts to survive against all odds.</p>
                         <p>Your team is divided into two groups: astronauts, and mission control. Each group is facing its own challenges while simultaneously attempting to solve the overarching catastrophic issues that must be resolved in order for the astronauts to return safely.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="apollo">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
 
             <!-- Team Brainiac -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/team brainiac.avif?v=2');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Brainiac.png');"></div>
                 <div class="activity-content">
                     <h3>Team Brainiac</h3>
                     <div class="activity-meta">
@@ -667,7 +511,7 @@
                         <span><i class="fas fa-users"></i> 10-150</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Fun, fast, and brainy! Team Brainiac highlights each person's strengths through engaging mini-challenges.</p>
+                        <p>Micro challenges and puzzles that highlight each person's unique strengths.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Team Brainiac</h3>
@@ -677,15 +521,12 @@
                         </div>
                         <p>We're all bright. Just how bright we are, and how we are bright, can be seen and experienced in Team Brainiac. This program features a wide range of micro challenges that teams complete to earn points. Each challenge has a different focus and uses different types of skills and thinking, so it's a great way to keep the whole team engaged and highlight each person's unique strengths.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="teambrainiac">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
 
             <!-- Blueprint Simulation -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Blueprint.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Blueprint%20.png');"></div>
                 <div class="activity-content">
                     <h3>Blueprint Simulation</h3>
                     <div class="activity-meta">
@@ -693,7 +534,7 @@
                         <span><i class="fas fa-users"></i> 15-40</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Build the machine! Limited info, tough constraints, and teamwork challenges await in this simulation.</p>
+                        <p>Build a machine with limited information, tough customers, and resource constraints.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Blueprint Simulation</h3>
@@ -704,15 +545,12 @@
                         <p>The task: build the machine. Your customer is counting on it. The only problem is, your team has never built this type of machine before and you have very limited and scattered information about how to do it. Oh, and there may be a few other problems too. Tough customer, change orders, resource constraints, and limited ability to communicate with other parts of the team pervade this simulation.</p>
                         <p>It's a bit of a "fun meets serious" situation. We're pretty sure you'll walk away with some new insights about effective teamwork, as well as a little contraption that you never thought you'd need.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="blueprint">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
 
             <!-- Inter Connect -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/InterConnect.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/InterConnect.png');"></div>
                 <div class="activity-content">
                     <h3>Inter Connect</h3>
                     <div class="activity-meta">
@@ -720,7 +558,7 @@
                         <span><i class="fas fa-users"></i> 5-20</span>
                     </div>
                     <div class="activity-preview">
-                        <p>Struggling with virtual or hybrid teams? Simulations boost communication, problem-solving, and collaboration online.</p>
+                        <p>Web-based simulation for virtual or hybrid teams, focused on communication and collaboration.</p>
                     </div>
                     <div class="activity-full">
                         <h3>Inter Connect</h3>
@@ -730,9 +568,6 @@
                         </div>
                         <p>Struggling to navigate the ins and outs of managing a virtual or hybrid team? Our custom-designed simulations are here to help. With a focus on effective communication, problem solving, and collaboration across boundaries, we can provide the tune-up your team needs. Designs can be for partially or completely virtual teams.</p>
                     </div>
-                    <button class="activity-ellipses" data-activity="interconnect">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
                 </div>
             </div>
         </section>
@@ -751,18 +586,6 @@
             <p>&copy; 2025 Leading Edge Team Building, a division of Leading Edge Consulting Group LLC. All rights reserved. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy Policy</a></p>
         </div>
     </footer>
-
-    <!-- Mobile Activity Overlay -->
-    <div class="mobile-activity-overlay" id="mobileOverlay">
-        <div class="mobile-overlay-header">
-            <h2 class="mobile-overlay-title" id="overlayTitle"></h2>
-            <button class="mobile-overlay-close" id="overlayClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="mobile-overlay-meta" id="overlayMeta"></div>
-        <div class="mobile-overlay-content" id="overlayContent"></div>
-    </div>
 
     <script src="script.js"></script>
     <script>
@@ -784,59 +607,6 @@
         window.addEventListener('scroll', onScroll);
         onScroll();
 
-        // Mobile activity overlay functionality
-        const ellipsesButtons = document.querySelectorAll('.activity-ellipses');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const overlayTitle = document.getElementById('overlayTitle');
-        const overlayMeta = document.getElementById('overlayMeta');
-        const overlayContent = document.getElementById('overlayContent');
-        const overlayClose = document.getElementById('overlayClose');
-        ellipsesButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const activityCard = this.closest('.activity-card');
-                const title = activityCard.querySelector('h3').textContent;
-                const meta = activityCard.querySelector('.activity-meta').innerHTML;
-                const fullContent = activityCard.querySelector('.activity-full');
-                
-                // Extract content from the full activity section
-                const contentParagraphs = fullContent.querySelectorAll('p');
-                let contentHTML = '';
-                contentParagraphs.forEach(p => {
-                    contentHTML += `<p>${p.textContent}</p>`;
-                });
-
-                // Populate overlay
-                overlayTitle.textContent = title;
-                overlayMeta.innerHTML = meta;
-                overlayContent.innerHTML = contentHTML;
-
-                // Show overlay
-                mobileOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            });
-        });
-
-        // Close overlay functionality
-        overlayClose.addEventListener('click', function() {
-            mobileOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        });
-
-        // Close overlay when clicking outside content
-        mobileOverlay.addEventListener('click', function(e) {
-            if (e.target === mobileOverlay) {
-                mobileOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close overlay with escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mobileOverlay.classList.contains('active')) {
-                mobileOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
     });
     </script>
 </body>
