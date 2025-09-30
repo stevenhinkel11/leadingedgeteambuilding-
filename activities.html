@@ -475,7 +475,7 @@
 
             <!-- The Island -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/dbe0e91e873da277770027766caec76ead713050/Island%20Image.JPG');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/The Island.avif');"></div>
                 <div class="activity-content">
                     <h3>The Island</h3>
                     <div class="activity-meta">
@@ -502,7 +502,7 @@
 
             <!-- Level Up -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/8f03597e243d8261827663df8f029e88a9725583/level%20up.jpeg');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Level Up.avif');"></div>
                 <div class="activity-content">
                     <h3>Level Up</h3>
                     <div class="activity-meta">
@@ -529,7 +529,7 @@
 
             <!-- Great Outdoors -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/great-outdoors.avif');"></div>
                 <div class="activity-content">
                     <h3>Great Outdoors</h3>
                     <div class="activity-meta">
@@ -556,7 +556,7 @@
 
             <!-- Game On -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/dbe0e91e873da277770027766caec76ead713050/game%20on.jpg');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Game On.avif');"></div>
                 <div class="activity-content">
                     <h3>Game On</h3>
                     <div class="activity-meta">
@@ -614,7 +614,7 @@
         <section class="activity-grid">
             <!-- Great Escape -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Great%20Escape.png');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Great Escape.avif');"></div>
                 <div class="activity-content">
                     <h3>Great Escape</h3>
                     <div class="activity-meta">
@@ -641,7 +641,7 @@
 
             <!-- Apollo Simulation -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/4efc8420be1a608e5656266c0b2e7fed9e5ce371/Apollo.png');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Apollo.avif');"></div>
                 <div class="activity-content">
                     <h3>Apollo Simulation</h3>
                     <div class="activity-meta">
@@ -748,7 +748,7 @@
 
             <!-- Blueprint Simulation -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Blueprint3.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Blueprint.avif');"></div>
                 <div class="activity-content">
                     <h3>Blueprint Simulation</h3>
                     <div class="activity-meta">
@@ -841,9 +841,27 @@
                 const fullContent = activityCard.querySelector('.activity-full');
                 const activityImage = activityCard.querySelector('.activity-image');
                 
-                // Get image URL
+                // Get image URL - more robust extraction
+                let imageUrl = '';
                 const imageStyle = activityImage.style.backgroundImage;
-                const imageUrl = imageStyle.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+                if (imageStyle && imageStyle !== 'none') {
+                    const match = imageStyle.match(/url\(['"]?(.*?)['"]?\)/);
+                    if (match && match[1]) {
+                        imageUrl = match[1];
+                    }
+                }
+                
+                // Fallback: try to get from computed style if inline style fails
+                if (!imageUrl) {
+                    const computedStyle = window.getComputedStyle(activityImage);
+                    const computedBgImage = computedStyle.backgroundImage;
+                    if (computedBgImage && computedBgImage !== 'none') {
+                        const match = computedBgImage.match(/url\(['"]?(.*?)['"]?\)/);
+                        if (match && match[1]) {
+                            imageUrl = match[1];
+                        }
+                    }
+                }
                 
                 // Get content
                 const contentParagraphs = fullContent.querySelectorAll('p');
@@ -853,7 +871,12 @@
                 });
 
                 // Populate overlay
-                overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
+                if (imageUrl) {
+                    overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
+                } else {
+                    // Fallback image if none found
+                    overlayImage.style.backgroundImage = 'url(https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Level Up.avif)';
+                }
                 overlayTitle.textContent = title;
                 overlayMeta.innerHTML = meta;
                 overlayContent.innerHTML = contentHTML;
