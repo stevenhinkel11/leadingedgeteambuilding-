@@ -531,4 +531,123 @@ footer {
     padding-left: 1.25rem;
 }
 .steps li { margin: 0.4rem 0; }
-.steps li strong { color: var(--primary-color); } 
+.steps li strong { color: var(--primary-color); }
+
+/* Activity Cards */
+.activity-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.activity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Mobile-only behavior */
+@media (max-width: 768px) {
+    .activity-card {
+        cursor: pointer;
+    }
+    
+    /* Hide full content on mobile by default */
+    .activity-full {
+        display: none;
+    }
+    
+    /* Show ellipsis on preview text */
+    .activity-preview p {
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        margin-bottom: 0;
+    }
+    
+    .activity-preview::after {
+        content: "...";
+        position: absolute;
+        bottom: -5px;
+        right: 10px;
+        background: var(--secondary-color);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 1.4rem;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        z-index: 10;
+    }
+    
+    /* When expanded, hide preview and show full content */
+    .activity-card.expanded .activity-preview {
+        display: none;
+    }
+    
+    .activity-card.expanded .activity-full {
+        display: block;
+    }
+    
+    /* Full screen expansion */
+    .activity-card.expanded {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        background: white;
+        padding: 0;
+        overflow: hidden;
+        box-shadow: none;
+        transform: none;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .activity-card.expanded .activity-image {
+        height: 35vh;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        flex-shrink: 0;
+        margin: 0;
+    }
+    
+    .activity-card.expanded .activity-content {
+        padding: 1.5rem;
+        flex: 1;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    .activity-card.expanded .activity-full {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    .activity-card.expanded .activity-full h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+    
+    .activity-card.expanded .activity-full .activity-meta {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    
+    .activity-card.expanded .activity-full p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+} 

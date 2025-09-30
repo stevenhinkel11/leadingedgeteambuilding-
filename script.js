@@ -256,4 +256,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { threshold: 0.3 });
         statEls.forEach(el => io2.observe(el));
     }
+
+    // Activity Card Expand/Collapse (Mobile only)
+    const activityCards = document.querySelectorAll('.activity-card');
+    activityCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Only work on mobile devices
+            if (window.innerWidth <= 768) {
+                if (!this.classList.contains('expanded')) {
+                    // Expand the card
+                    this.classList.add('expanded');
+                    // Prevent body scroll when expanded
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    // Close the card
+                    this.classList.remove('expanded');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+    });
 }); 
