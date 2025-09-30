@@ -448,7 +448,7 @@
         <section class="activity-grid">
             <!-- GeoQuest -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/refs/heads/Images/Geo.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Geo.avif');"></div>
                 <div class="activity-content">
                     <h3>GeoQuest</h3>
                     <div class="activity-meta">
@@ -502,7 +502,7 @@
 
             <!-- Level Up -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Level Up.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/level up.avif');"></div>
                 <div class="activity-content">
                     <h3>Level Up</h3>
                     <div class="activity-meta">
@@ -556,7 +556,7 @@
 
             <!-- Game On -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Game On.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/game on.avif');"></div>
                 <div class="activity-content">
                     <h3>Game On</h3>
                     <div class="activity-meta">
@@ -614,7 +614,7 @@
         <section class="activity-grid">
             <!-- Great Escape -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Great Escape.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Great Escape Square.avif');"></div>
                 <div class="activity-content">
                     <h3>Great Escape</h3>
                     <div class="activity-meta">
@@ -748,7 +748,7 @@
 
             <!-- Blueprint Simulation -->
             <div class="activity-card">
-                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Blueprint.avif');"></div>
+                <div class="activity-image" style="background-image: url('https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Blueprint3.avif');"></div>
                 <div class="activity-content">
                     <h3>Blueprint Simulation</h3>
                     <div class="activity-meta">
@@ -834,34 +834,33 @@
             const overlayContent = document.getElementById('overlayContent');
             const overlayClose = document.getElementById('overlayClose');
 
+            // Image mapping for each activity - exact match to HTML
+            const activityImages = {
+                'GeoQuest': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Geo.avif',
+                'The Island': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/The Island.avif',
+                'Level Up': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/level up.avif',
+                'Great Outdoors': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/great-outdoors.avif',
+                'Game On': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/game on.avif',
+                'Into the Wild': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IntoTheWild.avif',
+                'Great Escape': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Great Escape Square.avif',
+                'Apollo Simulation': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Apollo.avif',
+                'Team Chronicle': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Team Chronicle.avif',
+                'Team Brainiac': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/team brainiac.avif',
+                'Inter Connect': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/InterConnect2.avif',
+                'Blueprint Simulation': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Blueprint3.avif'
+            };
+
             // Show overlay function
             function showOverlay(activityCard) {
                 const title = activityCard.querySelector('h3').textContent;
                 const meta = activityCard.querySelector('.activity-meta').innerHTML;
                 const fullContent = activityCard.querySelector('.activity-full');
-                const activityImage = activityCard.querySelector('.activity-image');
                 
-                // Get image URL - more robust extraction
-                let imageUrl = '';
-                const imageStyle = activityImage.style.backgroundImage;
-                if (imageStyle && imageStyle !== 'none') {
-                    const match = imageStyle.match(/url\(['"]?(.*?)['"]?\)/);
-                    if (match && match[1]) {
-                        imageUrl = match[1];
-                    }
-                }
+                // Get image URL from mapping
+                const imageUrl = activityImages[title] || 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/level up.avif';
                 
-                // Fallback: try to get from computed style if inline style fails
-                if (!imageUrl) {
-                    const computedStyle = window.getComputedStyle(activityImage);
-                    const computedBgImage = computedStyle.backgroundImage;
-                    if (computedBgImage && computedBgImage !== 'none') {
-                        const match = computedBgImage.match(/url\(['"]?(.*?)['"]?\)/);
-                        if (match && match[1]) {
-                            imageUrl = match[1];
-                        }
-                    }
-                }
+                console.log('Activity title:', title);
+                console.log('Mapped image URL:', imageUrl);
                 
                 // Get content
                 const contentParagraphs = fullContent.querySelectorAll('p');
@@ -871,12 +870,7 @@
                 });
 
                 // Populate overlay
-                if (imageUrl) {
-                    overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
-                } else {
-                    // Fallback image if none found
-                    overlayImage.style.backgroundImage = 'url(https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Level Up.avif)';
-                }
+                overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
                 overlayTitle.textContent = title;
                 overlayMeta.innerHTML = meta;
                 overlayContent.innerHTML = contentHTML;
