@@ -228,6 +228,136 @@
             transform: scale(1.04) translateY(0);
         }
 
+        /* Mobile ellipses button */
+        .activity-ellipses {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 15;
+        }
+
+        /* Hide ellipses button on desktop */
+        @media (min-width: 769px) {
+            .activity-ellipses {
+                display: none !important;
+            }
+        }
+
+        .activity-ellipses:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .activity-ellipses i {
+            font-size: 1.2rem;
+            pointer-events: none;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Ensure no duplicate buttons appear */
+        .activity-card .fa-ellipsis-h {
+            display: inline;
+        }
+
+        /* Mobile overlay for full-screen activity text */
+        .mobile-activity-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 1000;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-activity-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-overlay-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .mobile-overlay-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .mobile-overlay-close {
+            background: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay-close:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .mobile-overlay-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+
+        .mobile-overlay-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mobile-overlay-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .mobile-overlay-content p {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-overlay-content p:last-child {
+            margin-bottom: 0;
+        }
+
         .activity-card.expanded .activity-full {
             opacity: 1;
             visibility: visible;
@@ -264,6 +394,18 @@
 
             .activity-full {
                 max-height: 420px;
+            }
+
+            /* Show ellipses button on mobile */
+            .activity-ellipses {
+                display: flex;
+            }
+
+            /* Hide hover effect on mobile */
+            .activity-card:hover .activity-full {
+                opacity: 0;
+                visibility: hidden;
+                transform: scale(0.98) translateY(20px);
             }
         }
     </style>
@@ -327,6 +469,9 @@
                         <p>Ready, set, go geocaching! You and your team will use GPS to try to find as many hidden containers as you can in an expansive area with a limited time-frame.</p>
                         <p>As you discover caches, you'll likely discover new insights about your teammates. This program can be configured as an all out competition between teams, or a collaboration among multiple teams trying to achieve a greater goal together.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="geoquest">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -351,6 +496,9 @@
                         <p>If the thought of being stranded on a desert island sounds intimidating yet exciting, we have the activity for you. In this simulation, your team has been "trapped on a desert island" and must solve a series of difficult challenges to survive and get rescued.</p>
                         <p>The scenario: You and your team are stranded on a desert island. You must work together to survive and get rescued. The challenges range from building a shelter, finding food, and purifying water to navigating through treacherous terrain and dealing with the elements. You'll need to use your problem-solving skills, teamwork, and adaptability to succeed.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="island">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -375,6 +523,9 @@
                         <p>The perfect activity for groups who want to come together or deepen connections quickly. Level Up works its magic every time. This program is a blend of low ropes course activities that are both customizable and portable.</p>
                         <p>Level Up is designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes a variety of activities that are both fun and challenging, allowing participants to learn and grow in a supportive environment.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="levelup">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -399,6 +550,9 @@
                         <p>Considering a unique overnight retreat with your team? Nothing connects people better than spending time together in the great outdoors. Our overnight camping trips range from one to multiple nights, and include a series of custom designed experiential activities.</p>
                         <p>The Great Outdoors program offers a range of outdoor activities that are designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes activities such as hiking, team-building exercises, and outdoor games that are tailored to the specific needs and interests of your team.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="greatoutdoors">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -423,6 +577,9 @@
                         <p>There's nothing like a little friendly competition to get people fired up. Particularly when the activities are fun and challenging, and you get to complete them in a beautiful beach or park setting.</p>
                         <p>Game On is designed to help teams build trust, communicate effectively, and work together more efficiently. The program includes a variety of activities that are both fun and challenging, allowing participants to learn and grow in a supportive environment.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="gameon">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -447,6 +604,9 @@
                         <p>Into the Wild is an outdoor experience designed to help teams step away from distractions and reconnect with themselves and each other. Through guided modules—like device-free solo walks, reflection exercises, and symbolic exploration—participants deepen awareness and uncover fresh perspectives.</p>
                         <p>This program invites individuals to get in touch by being out of touch, using nature as both a setting and a catalyst for insight. The result is a meaningful blend of solitude and shared discovery that strengthens clarity, alignment, and connection.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="intothewild">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -475,6 +635,9 @@
                         <p>You're trapped. And for better or worse, you're trapped with your work team. You have a limited amount of time to get out of the room before [insert your worst nightmare here] occurs. Now, can you calm down, work together, and find and decipher the relevant clues to escape the room? Maybe, but success is far from guaranteed.</p>
                         <p>What make our escape rooms unique are two things. First, we're one of few who bring an escape room to you in your office or offsite location. Second, we provide the opportunity to pause, reflect, and learn how to improve your team's process and communication to increase your chance of success in the second half.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="greatescape">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -500,6 +663,9 @@
                         <p>This simulation brings to life aspects of the Apollo 13 mission, and draws parallels to the creative problem solving, teamwork, and communication that allowed the astronauts to survive against all odds.</p>
                         <p>Your team is divided into two groups: astronauts, and mission control. Each group is facing its own challenges while simultaneously attempting to solve the overarching catastrophic issues that must be resolved in order for the astronauts to return safely.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="apollo">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -524,6 +690,9 @@
                         <p>Team Chronicle is the perfect activity for groups who want to reflect on their journey, align around their vision, and create something lasting together. This program blends storytelling, creativity, and collaboration in a highly engaging way.</p>
                         <p>Teams take on different roles—writers, illustrators, interviewers, and more—as they co-create a storybook that captures the essence of their organization. With limited resources and the need for crisp alignment, participants must communicate clearly, think strategically, and support one another. The result is a tangible artifact—part vision, part narrative—that inspires the team long after the activity ends.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="teamchronicle">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -547,6 +716,9 @@
                         </div>
                         <p>We're all bright. Just how bright we are, and how we are bright, can be seen and experienced in Team Brainiac. This program features a wide range of micro challenges that teams complete to earn points. Each challenge has a different focus and uses different types of skills and thinking, so it's a great way to keep the whole team engaged and highlight each person's unique strengths.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="teambrainiac">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -570,6 +742,9 @@
                         </div>
                         <p>Struggling to navigate the ins and outs of managing a virtual or hybrid team? Our custom-designed simulations are here to help. With a focus on effective communication, problem solving, and collaboration across boundaries, we can provide the tune-up your team needs. Designs can be for partially or completely virtual teams.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="interconnect">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
 
@@ -594,6 +769,9 @@
                         <p>The task: build the machine. Your customer is counting on it. The only problem is, your team has never built this type of machine before and you have very limited and scattered information about how to do it. Oh, and there may be a few other problems too. Tough customer, change orders, resource constraints, and limited ability to communicate with other parts of the team pervade this simulation.</p>
                         <p>It's a bit of a "fun meets serious" situation. We're pretty sure you'll walk away with some new insights about effective teamwork, as well as a little contraption that you never thought you'd need.</p>
                     </div>
+                    <button class="activity-ellipses" data-activity="blueprint">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -612,6 +790,18 @@
             <p>&copy; 2025 Leading Edge Team Building, a division of Leading Edge Consulting Group LLC. All rights reserved. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy Policy</a></p>
         </div>
     </footer>
+
+    <!-- Mobile Activity Overlay -->
+    <div class="mobile-activity-overlay" id="mobileOverlay">
+        <div class="mobile-overlay-header">
+            <h2 class="mobile-overlay-title" id="overlayTitle"></h2>
+            <button class="mobile-overlay-close" id="overlayClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-overlay-meta" id="overlayMeta"></div>
+        <div class="mobile-overlay-content" id="overlayContent"></div>
+    </div>
 
     <script src="script.js"></script>
     <script>
@@ -632,6 +822,61 @@
         }
         window.addEventListener('scroll', onScroll);
         onScroll();
+
+        // Mobile activity overlay functionality
+        const ellipsesButtons = document.querySelectorAll('.activity-ellipses');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const overlayMeta = document.getElementById('overlayMeta');
+        const overlayContent = document.getElementById('overlayContent');
+        const overlayClose = document.getElementById('overlayClose');
+        
+        ellipsesButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const activityCard = this.closest('.activity-card');
+                const title = activityCard.querySelector('h3').textContent;
+                const meta = activityCard.querySelector('.activity-meta').innerHTML;
+                const fullContent = activityCard.querySelector('.activity-full');
+                
+                // Extract content from the full activity section
+                const contentParagraphs = fullContent.querySelectorAll('p');
+                let contentHTML = '';
+                contentParagraphs.forEach(p => {
+                    contentHTML += `<p>${p.textContent}</p>`;
+                });
+
+                // Populate overlay
+                overlayTitle.textContent = title;
+                overlayMeta.innerHTML = meta;
+                overlayContent.innerHTML = contentHTML;
+
+                // Show overlay
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        });
+
+        // Close overlay functionality
+        overlayClose.addEventListener('click', function() {
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Close overlay when clicking outside content
+        mobileOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileOverlay) {
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close overlay with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileOverlay.classList.contains('active')) {
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
 
     });
     </script>

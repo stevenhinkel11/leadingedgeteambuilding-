@@ -567,20 +567,9 @@ footer {
         margin-bottom: 0;
     }
     
+    /* Old ellipsis button - now using dedicated ellipses button instead */
     .activity-preview::after {
-        content: "...";
-        position: absolute;
-        bottom: -5px;
-        right: 10px;
-        background: var(--secondary-color);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 1.4rem;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        z-index: 10;
+        content: none;
     }
     
     /* When expanded, hide preview and show full content */
