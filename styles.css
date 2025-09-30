@@ -551,9 +551,9 @@ footer {
         cursor: pointer;
     }
     
-    /* Hide full content on mobile by default */
+    /* Hide full content on mobile by default - DISABLED (now using ellipses button overlay) */
     .activity-full {
-        display: none;
+        display: block;
     }
     
     /* Show ellipsis on preview text */

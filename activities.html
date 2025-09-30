@@ -841,21 +841,27 @@
 
             // Function to show overlay
             function showOverlay(activityCard) {
+                console.log('showOverlay called');
                 const title = activityCard.querySelector('h3').textContent;
                 const meta = activityCard.querySelector('.activity-meta').innerHTML;
                 const fullContent = activityCard.querySelector('.activity-full');
                 const activityImage = activityCard.querySelector('.activity-image');
                 
+                console.log('Elements found:', {title, meta, fullContent, activityImage});
+                
                 // Get image URL
                 const imageStyle = activityImage.style.backgroundImage;
                 const imageUrl = imageStyle.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+                console.log('Image URL:', imageUrl);
                 
                 // Get content
                 const contentParagraphs = fullContent.querySelectorAll('p');
+                console.log('Content paragraphs found:', contentParagraphs.length);
                 let contentHTML = '';
                 contentParagraphs.forEach(p => {
                     contentHTML += '<p>' + p.textContent + '</p>';
                 });
+                console.log('Content HTML:', contentHTML);
 
                 // Populate overlay
                 overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
@@ -863,8 +869,11 @@
                 overlayMeta.innerHTML = meta;
                 overlayContent.innerHTML = contentHTML;
 
+                console.log('Overlay elements:', {overlayImage, overlayTitle, overlayMeta, overlayContent});
+
                 // Show overlay
                 mobileOverlay.classList.add('active');
+                console.log('Overlay shown');
             }
 
             // Function to hide overlay
