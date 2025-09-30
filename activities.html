@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activities - Leading Edge Team Building</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/LETB Logo No Words Transparent.avif">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -272,7 +273,7 @@
             display: inline;
         }
 
-        /* Mobile overlay for full-screen activity text */
+        /* Mobile overlay for full-screen activity with image and text */
         .mobile-activity-overlay {
             position: fixed;
             top: 0;
@@ -281,12 +282,13 @@
             bottom: 0;
             background: var(--white);
             z-index: 1000;
-            padding: 2rem 1.5rem;
-            overflow-y: auto;
             opacity: 0;
             visibility: hidden;
             transform: translateY(100%);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .mobile-activity-overlay.active {
@@ -295,11 +297,25 @@
             transform: translateY(0);
         }
 
+        .mobile-overlay-image {
+            height: 40vh;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .mobile-overlay-content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
         .mobile-overlay-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--light-bg);
         }
@@ -323,6 +339,9 @@
             cursor: pointer;
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .mobile-overlay-close:hover {
@@ -793,14 +812,17 @@
 
     <!-- Mobile Activity Overlay -->
     <div class="mobile-activity-overlay" id="mobileOverlay">
-        <div class="mobile-overlay-header">
-            <h2 class="mobile-overlay-title" id="overlayTitle"></h2>
-            <button class="mobile-overlay-close" id="overlayClose">
-                <i class="fas fa-times"></i>
-            </button>
+        <div class="mobile-overlay-image" id="overlayImage"></div>
+        <div class="mobile-overlay-content-wrapper">
+            <div class="mobile-overlay-header">
+                <h2 class="mobile-overlay-title" id="overlayTitle"></h2>
+                <button class="mobile-overlay-close" id="overlayClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-overlay-meta" id="overlayMeta"></div>
+            <div class="mobile-overlay-content" id="overlayContent"></div>
         </div>
-        <div class="mobile-overlay-meta" id="overlayMeta"></div>
-        <div class="mobile-overlay-content" id="overlayContent"></div>
     </div>
 
     <script src="script.js"></script>
@@ -826,33 +848,59 @@
         // Mobile activity overlay functionality
         const ellipsesButtons = document.querySelectorAll('.activity-ellipses');
         const mobileOverlay = document.getElementById('mobileOverlay');
+        const overlayImage = document.getElementById('overlayImage');
         const overlayTitle = document.getElementById('overlayTitle');
         const overlayMeta = document.getElementById('overlayMeta');
         const overlayContent = document.getElementById('overlayContent');
         const overlayClose = document.getElementById('overlayClose');
         
+        // Check if all required elements exist
+        if (!mobileOverlay || !overlayImage || !overlayTitle || !overlayMeta || !overlayContent || !overlayClose) {
+            console.warn('Mobile overlay elements not found');
+        }
+        
         ellipsesButtons.forEach(button => {
             button.addEventListener('click', function() {
-                const activityCard = this.closest('.activity-card');
-                const title = activityCard.querySelector('h3').textContent;
-                const meta = activityCard.querySelector('.activity-meta').innerHTML;
-                const fullContent = activityCard.querySelector('.activity-full');
-                
-                // Extract content from the full activity section
-                const contentParagraphs = fullContent.querySelectorAll('p');
-                let contentHTML = '';
-                contentParagraphs.forEach(p => {
-                    contentHTML += `<p>${p.textContent}</p>`;
-                });
+                try {
+                    const activityCard = this.closest('.activity-card');
+                    if (!activityCard) {
+                        console.error('Activity card not found');
+                        return;
+                    }
+                    
+                    const title = activityCard.querySelector('h3');
+                    const meta = activityCard.querySelector('.activity-meta');
+                    const fullContent = activityCard.querySelector('.activity-full');
+                    const activityImage = activityCard.querySelector('.activity-image');
+                    
+                    if (!title || !meta || !fullContent || !activityImage) {
+                        console.error('Required elements not found in activity card');
+                        return;
+                    }
+                    
+                    // Get the background image URL
+                    const imageStyle = activityImage.style.backgroundImage;
+                    const imageUrl = imageStyle.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+                    
+                    // Extract content from the full activity section
+                    const contentParagraphs = fullContent.querySelectorAll('p');
+                    let contentHTML = '';
+                    contentParagraphs.forEach(p => {
+                        contentHTML += `<p>${p.textContent}</p>`;
+                    });
 
-                // Populate overlay
-                overlayTitle.textContent = title;
-                overlayMeta.innerHTML = meta;
-                overlayContent.innerHTML = contentHTML;
+                    // Populate overlay
+                    overlayImage.style.backgroundImage = `url(${imageUrl})`;
+                    overlayTitle.textContent = title.textContent;
+                    overlayMeta.innerHTML = meta.innerHTML;
+                    overlayContent.innerHTML = contentHTML;
 
-                // Show overlay
-                mobileOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    // Show overlay
+                    mobileOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                } catch (error) {
+                    console.error('Error in mobile overlay:', error);
+                }
             });
         });
 
