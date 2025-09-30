@@ -229,7 +229,7 @@
             transform: scale(1.04) translateY(0);
         }
 
-        /* Mobile ellipses button */
+        /* Mobile ellipses button - bulletproof for mobile */
         .activity-ellipses {
             position: absolute;
             bottom: 1rem;
@@ -238,15 +238,17 @@
             color: var(--white);
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             display: none;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-            z-index: 15;
+            z-index: 20;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Hide ellipses button on desktop */
@@ -262,15 +264,8 @@
         }
 
         .activity-ellipses i {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             pointer-events: none;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Ensure no duplicate buttons appear */
-        .activity-card .fa-ellipsis-h {
-            display: inline;
         }
 
         /* Mobile overlay - simple full screen approach */
@@ -829,8 +824,8 @@
         window.addEventListener('scroll', onScroll);
         onScroll();
 
-        // Simple mobile overlay functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        // Mobile overlay functionality - simplified for mobile reliability
+        function initMobileOverlay() {
             const ellipsesButtons = document.querySelectorAll('.activity-ellipses');
             const mobileOverlay = document.getElementById('mobileOverlay');
             const overlayImage = document.getElementById('overlayImage');
@@ -839,29 +834,23 @@
             const overlayContent = document.getElementById('overlayContent');
             const overlayClose = document.getElementById('overlayClose');
 
-            // Function to show overlay
+            // Show overlay function
             function showOverlay(activityCard) {
-                console.log('showOverlay called');
                 const title = activityCard.querySelector('h3').textContent;
                 const meta = activityCard.querySelector('.activity-meta').innerHTML;
                 const fullContent = activityCard.querySelector('.activity-full');
                 const activityImage = activityCard.querySelector('.activity-image');
                 
-                console.log('Elements found:', {title, meta, fullContent, activityImage});
-                
                 // Get image URL
                 const imageStyle = activityImage.style.backgroundImage;
                 const imageUrl = imageStyle.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
-                console.log('Image URL:', imageUrl);
                 
                 // Get content
                 const contentParagraphs = fullContent.querySelectorAll('p');
-                console.log('Content paragraphs found:', contentParagraphs.length);
                 let contentHTML = '';
                 contentParagraphs.forEach(p => {
                     contentHTML += '<p>' + p.textContent + '</p>';
                 });
-                console.log('Content HTML:', contentHTML);
 
                 // Populate overlay
                 overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
@@ -869,19 +858,16 @@
                 overlayMeta.innerHTML = meta;
                 overlayContent.innerHTML = contentHTML;
 
-                console.log('Overlay elements:', {overlayImage, overlayTitle, overlayMeta, overlayContent});
-
                 // Show overlay
                 mobileOverlay.classList.add('active');
-                console.log('Overlay shown');
             }
 
-            // Function to hide overlay
+            // Hide overlay function
             function hideOverlay() {
                 mobileOverlay.classList.remove('active');
             }
 
-            // Add click handlers to ellipses buttons
+            // Add click handlers
             ellipsesButtons.forEach(function(button) {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -891,27 +877,27 @@
                 });
             });
 
-            // Add click handler to close button
+            // Close button
             overlayClose.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 hideOverlay();
             });
 
-            // Add click handler to overlay background
+            // Click outside to close
             mobileOverlay.addEventListener('click', function(e) {
                 if (e.target === mobileOverlay) {
                     hideOverlay();
                 }
             });
+        }
 
-            // Add escape key handler
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileOverlay.classList.contains('active')) {
-                    hideOverlay();
-                }
-            });
-        });
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMobileOverlay);
+        } else {
+            initMobileOverlay();
+        }
 
     });
     </script>
