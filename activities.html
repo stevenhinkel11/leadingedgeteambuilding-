@@ -273,104 +273,88 @@
             display: inline;
         }
 
-        /* Mobile overlay for full-screen activity with image and text */
+        /* Mobile overlay - simple full screen approach */
         .mobile-activity-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--white);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            width: 100vw;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 9999;
+            display: none;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .mobile-activity-overlay.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            display: block;
         }
 
         .mobile-overlay-image {
-            height: 40vh;
             width: 100%;
+            height: 300px;
             background-size: cover;
             background-position: center;
-            flex-shrink: 0;
         }
 
         .mobile-overlay-content-wrapper {
-            flex: 1;
-            padding: 1.5rem;
+            padding: 20px;
         }
 
         .mobile-overlay-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--light-bg);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
         }
 
         .mobile-overlay-title {
-            font-size: 1.8rem;
+            font-size: 24px;
             color: var(--primary-color);
             margin: 0;
+            font-weight: bold;
         }
 
         .mobile-overlay-close {
             background: var(--secondary-color);
-            color: var(--white);
+            color: white;
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .mobile-overlay-close:hover {
-            background: var(--primary-color);
-            transform: scale(1.1);
+            font-size: 18px;
+            font-weight: bold;
         }
 
         .mobile-overlay-meta {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 20px;
+            margin-bottom: 20px;
             color: var(--secondary-color);
-            font-size: 1rem;
+            font-size: 16px;
         }
 
         .mobile-overlay-meta span {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
         }
 
         .mobile-overlay-content {
-            font-size: 1.1rem;
+            font-size: 16px;
             line-height: 1.6;
-            color: var(--text-color);
+            color: #333;
         }
 
         .mobile-overlay-content p {
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
 
         .mobile-overlay-content p:last-child {
@@ -845,91 +829,79 @@
         window.addEventListener('scroll', onScroll);
         onScroll();
 
-        // Mobile activity overlay functionality
-        const ellipsesButtons = document.querySelectorAll('.activity-ellipses');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const overlayImage = document.getElementById('overlayImage');
-        const overlayTitle = document.getElementById('overlayTitle');
-        const overlayMeta = document.getElementById('overlayMeta');
-        const overlayContent = document.getElementById('overlayContent');
-        const overlayClose = document.getElementById('overlayClose');
-        
-        // Check if all required elements exist
-        if (!mobileOverlay || !overlayImage || !overlayTitle || !overlayMeta || !overlayContent || !overlayClose) {
-            console.warn('Mobile overlay elements not found');
-        }
-        
-        ellipsesButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                try {
+        // Simple mobile overlay functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const ellipsesButtons = document.querySelectorAll('.activity-ellipses');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            const overlayImage = document.getElementById('overlayImage');
+            const overlayTitle = document.getElementById('overlayTitle');
+            const overlayMeta = document.getElementById('overlayMeta');
+            const overlayContent = document.getElementById('overlayContent');
+            const overlayClose = document.getElementById('overlayClose');
+
+            // Function to show overlay
+            function showOverlay(activityCard) {
+                const title = activityCard.querySelector('h3').textContent;
+                const meta = activityCard.querySelector('.activity-meta').innerHTML;
+                const fullContent = activityCard.querySelector('.activity-full');
+                const activityImage = activityCard.querySelector('.activity-image');
+                
+                // Get image URL
+                const imageStyle = activityImage.style.backgroundImage;
+                const imageUrl = imageStyle.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+                
+                // Get content
+                const contentParagraphs = fullContent.querySelectorAll('p');
+                let contentHTML = '';
+                contentParagraphs.forEach(p => {
+                    contentHTML += '<p>' + p.textContent + '</p>';
+                });
+
+                // Populate overlay
+                overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
+                overlayTitle.textContent = title;
+                overlayMeta.innerHTML = meta;
+                overlayContent.innerHTML = contentHTML;
+
+                // Show overlay
+                mobileOverlay.classList.add('active');
+            }
+
+            // Function to hide overlay
+            function hideOverlay() {
+                mobileOverlay.classList.remove('active');
+            }
+
+            // Add click handlers to ellipses buttons
+            ellipsesButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     const activityCard = this.closest('.activity-card');
-                    if (!activityCard) {
-                        console.error('Activity card not found');
-                        return;
-                    }
-                    
-                    const title = activityCard.querySelector('h3');
-                    const meta = activityCard.querySelector('.activity-meta');
-                    const fullContent = activityCard.querySelector('.activity-full');
-                    const activityImage = activityCard.querySelector('.activity-image');
-                    
-                    if (!title || !meta || !fullContent || !activityImage) {
-                        console.error('Required elements not found in activity card');
-                        return;
-                    }
-                    
-                    // Get the background image URL
-                    const imageStyle = activityImage.style.backgroundImage;
-                    const imageUrl = imageStyle.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
-                    
-                    // Extract content from the full activity section
-                    const contentParagraphs = fullContent.querySelectorAll('p');
-                    let contentHTML = '';
-                    contentParagraphs.forEach(p => {
-                        contentHTML += `<p>${p.textContent}</p>`;
-                    });
-
-                    // Populate overlay
-                    overlayImage.style.backgroundImage = `url(${imageUrl})`;
-                    overlayTitle.textContent = title.textContent;
-                    overlayMeta.innerHTML = meta.innerHTML;
-                    overlayContent.innerHTML = contentHTML;
-
-                    // Show overlay
-                    console.log('Showing overlay');
-                    mobileOverlay.classList.add('active');
-                } catch (error) {
-                    console.error('Error in mobile overlay:', error);
-                }
+                    showOverlay(activityCard);
+                });
             });
-        });
 
-        // Close overlay functionality
-        if (overlayClose) {
+            // Add click handler to close button
             overlayClose.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Close button clicked');
-                mobileOverlay.classList.remove('active');
+                hideOverlay();
             });
-        }
 
-        // Close overlay when clicking outside content
-        if (mobileOverlay) {
+            // Add click handler to overlay background
             mobileOverlay.addEventListener('click', function(e) {
                 if (e.target === mobileOverlay) {
-                    console.log('Clicked outside overlay');
-                    mobileOverlay.classList.remove('active');
+                    hideOverlay();
                 }
             });
-        }
 
-        // Close overlay with escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mobileOverlay && mobileOverlay.classList.contains('active')) {
-                console.log('Escape key pressed');
-                mobileOverlay.classList.remove('active');
-            }
+            // Add escape key handler
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileOverlay.classList.contains('active')) {
+                    hideOverlay();
+                }
+            });
         });
 
     });
