@@ -357,13 +357,20 @@ footer {
 
 /* Footer links - make all links white */
 footer a {
-    color: var(--white);
+    color: var(--white) !important;
     text-decoration: underline;
     transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: var(--secondary-color);
+    color: var(--secondary-color) !important;
+}
+
+/* Override any default link colors in footer */
+footer p a,
+footer div a,
+footer section a {
+    color: var(--white) !important;
 }
 
 .footer-bottom {
