@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activities - Leading Edge Team Building</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/LETB Logo No Words Transparent.avif">
+    <link rel="icon" type="image/avif" href="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/LETB Logo No Words Transparent.avif">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -834,18 +834,18 @@
             const overlayContent = document.getElementById('overlayContent');
             const overlayClose = document.getElementById('overlayClose');
 
-            // Image mapping for each activity - exact match to HTML
+            // Image mapping for each activity - exact match to actual filenames
             const activityImages = {
-                'GeoQuest': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Geo.avif',
-                'The Island': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/The Island.avif',
-                'Level Up': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/level up.avif',
-                'Great Outdoors': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/great-outdoors.avif',
-                'Game On': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/game on.avif',
+                'GeoQuest': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/GeoQuest.avif',
+                'The Island': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/TheIsland.avif',
+                'Level Up': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/LevelUp.avif',
+                'Great Outdoors': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/GreatOutdoors.avif',
+                'Game On': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/GameOn.avif',
                 'Into the Wild': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/IntoTheWild.avif',
-                'Great Escape': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Great Escape Square.avif',
+                'Great Escape': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/GreatEscape.avif',
                 'Apollo Simulation': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Apollo.avif',
-                'Team Chronicle': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Team Chronicle.avif',
-                'Team Brainiac': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/team brainiac.avif',
+                'Team Chronicle': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/TeamChronicle.avif',
+                'Team Brainiac': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/TeamBrainiac.avif',
                 'Inter Connect': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/InterConnect2.avif',
                 'Blueprint Simulation': 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/Blueprint3.avif'
             };
@@ -857,7 +857,7 @@
                 const fullContent = activityCard.querySelector('.activity-full');
                 
                 // Get image URL from mapping
-                const imageUrl = activityImages[title] || 'https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/level up.avif';
+                const imageUrl = activityImages[title];
                 
                 console.log('Activity title:', title);
                 console.log('Mapped image URL:', imageUrl);
@@ -870,7 +870,9 @@
                 });
 
                 // Populate overlay
-                overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
+                if (imageUrl) {
+                    overlayImage.style.backgroundImage = 'url(' + imageUrl + ')';
+                }
                 overlayTitle.textContent = title;
                 overlayMeta.innerHTML = meta;
                 overlayContent.innerHTML = contentHTML;
