@@ -426,7 +426,6 @@
                             <input type="text" id="location" name="location" placeholder="City, State" required>
                         </div>
 
-
                         <div class="form-group">
                             <label for="goals">What are your main goals for this event? <span class="required">*</span></label>
                             <textarea id="goals" name="goals" placeholder="e.g., Improve team communication, build trust, celebrate achievements, etc." required></textarea>
@@ -525,7 +524,7 @@
     <script>
         // Form submission with Formspree (AJAX)
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             const successMessage = document.getElementById('successMessage');
@@ -571,7 +570,13 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Success - show custom message
+                    // Fire GA4 conversion event
+                    gtag('event', 'form_submission', {
+                        'event_category': 'contact',
+                        'event_label': 'team_building_inquiry'
+                    });
+
+                    // Show success message
                     successMessage.style.display = 'block';
                     form.reset();
                     successMessage.scrollIntoView({ behavior: 'smooth' });
@@ -584,7 +589,7 @@
                 }
             })
             .catch(error => {
-                // Error - show error message
+                // Show error message
                 errorMessage.style.display = 'block';
                 errorMessage.scrollIntoView({ behavior: 'smooth' });
                 
@@ -617,7 +622,6 @@
                 document.getElementById('teamSizeOtherText').value = '';
             }
         });
-        
     </script>
 </body>
 </html>
