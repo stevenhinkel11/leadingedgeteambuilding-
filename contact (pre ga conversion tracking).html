@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Bay Area Team Building</title>
+    <title>Contact Us - Leading Edge Team Building</title>
     <link rel="icon" type="image/avif" href="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/LETB Logo No Words Transparent.avif">
     
     <!-- Google Analytics -->
@@ -316,8 +316,8 @@
     <nav class="navbar">
         <div class="logo">
             <a href="index.html">
-                <img src="../Photos/Bay Area Team Building Logo.png" alt="Bay Area Team Building" class="navbar-logo">
-                <span class="logo-text">Bay Area Team Building</span>
+                <img src="https://raw.githubusercontent.com/stevenhinkel11/leadingedgeteambuilding-/Images/LETB Logo Words Transparent.avif" alt="Leading Edge Team Building" class="navbar-logo">
+                <span class="logo-text">Leading Edge Team Building</span>
             </a>
         </div>
         <ul class="nav-links">
@@ -351,7 +351,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <p><a href="mailto:hello@bayareateambuilding.com">hello@bayareateambuilding.com</a></p>
+                        <p><a href="mailto:hello@leadingedgeteambuilding.com">hello@leadingedgeteambuilding.com</a></p>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
@@ -359,7 +359,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-clock"></i>
-                        <p>Monday - Friday<br>9:00 AM - 6:00 PM PT</p>
+                        <p>Monday - Friday<br>9:00 AM - 6:00 PM PST</p>
                     </div>
                 </div>
 
@@ -425,6 +425,7 @@
                             <label for="location">Location <span class="required">*</span></label>
                             <input type="text" id="location" name="location" placeholder="City, State" required>
                         </div>
+
 
                         <div class="form-group">
                             <label for="goals">What are your main goals for this event? <span class="required">*</span></label>
@@ -512,11 +513,11 @@
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p><a href="tel:650-651-8326">650-651-8326 (TEAM)</a></p>
-                <p>hello@bayareateambuilding.com</p>
+                <p>hello@leadingedgeteambuilding.com</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Bay Area Team Building, a division of Leading Edge Consulting Group LLC. All rights reserved. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy Policy</a></p>
+            <p>&copy; 2025 Leading Edge Team Building, a division of Leading Edge Consulting Group LLC. All rights reserved. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy Policy</a></p>
         </div>
     </footer>
 
@@ -524,7 +525,7 @@
     <script>
         // Form submission with Formspree (AJAX)
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Prevent default form submission
             
             const submitBtn = document.getElementById('submitBtn');
             const successMessage = document.getElementById('successMessage');
@@ -570,13 +571,7 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Fire GA4 conversion event
-                    gtag('event', 'form_submission', {
-                        'event_category': 'contact',
-                        'event_label': 'team_building_inquiry'
-                    });
-
-                    // Show success message
+                    // Success - show custom message
                     successMessage.style.display = 'block';
                     form.reset();
                     successMessage.scrollIntoView({ behavior: 'smooth' });
@@ -589,7 +584,7 @@
                 }
             })
             .catch(error => {
-                // Show error message
+                // Error - show error message
                 errorMessage.style.display = 'block';
                 errorMessage.scrollIntoView({ behavior: 'smooth' });
                 
@@ -622,6 +617,7 @@
                 document.getElementById('teamSizeOtherText').value = '';
             }
         });
+        
     </script>
 </body>
 </html>
